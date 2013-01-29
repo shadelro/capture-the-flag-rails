@@ -1,0 +1,4 @@
+= form_tag add_user_game_path do
+  - unless (@available_users).empty?
+    = select_tag 'user_name', options_from_collection_for_select(@available_users, 'name', 'name')
+    = submit_tag 'Add User'

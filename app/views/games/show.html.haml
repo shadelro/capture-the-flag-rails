@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @game.name
+%p
+  %b Active:
+  = @game.is_active?
+%p
+  %b Location Goal:
+  = "#{@game.latitude_goal}, #{@game.longitude_goal}"
+%p
+  %b Users:
+  %ul
+    - @game.users.each do |user|
+      %li
+        = link_to user.name, user_path(user.id)
+        = link_to 'Remove', registration_path(@registrations[user.id]), method: :delete, data: { confirm: 'Are you sure?' }
+
+= render 'add_user_form'
+
+= link_to 'Edit', edit_game_path(@game)
+\|
+= link_to 'Back', games_path

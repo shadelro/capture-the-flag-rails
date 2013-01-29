@@ -1,0 +1,17 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @user.name
+%p
+  %b Location:
+  = "#{@user.latitude}, #{@user.longitude}"
+%p
+  %b Games:
+  %ul
+    - @user.games.each do |game|
+      %li= link_to game.name, game_path
+
+= link_to 'Edit', edit_user_path(@user)
+\|
+= link_to 'Back', users_path
