@@ -4,9 +4,11 @@ class CreateGames < ActiveRecord::Migration
       t.string :name
       t.float :latitude_goal
       t.float :longitude_goal
-      t.boolean :is_active
+      t.boolean :in_progress
 
       t.timestamps
     end
+
+    add_index :games, :name, unique: true
   end
 end

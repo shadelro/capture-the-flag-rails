@@ -80,4 +80,35 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def update_location
+    @user = User.find(params[:id])
+    if @user.update_location(params[:latitude], params[:longitude])
+      format.json { head :no_content }
+    end
+  end
+
+  def pick_up_flag
+    @user = User.find(params[:id])
+    flag = Flag.find_by_game_id(params[:game_id])
+
+    respond_to do |format|
+      if @user.pick_up_flag(flag)
+        format.html { redirect_to @user, notice: 'Got it!' }
+        format.json { head :no_content }
+      end
+    end
+  end
+
+  def drop_flag
+    @user = User.find(params[:id])
+    flag = Flag.find_by_user_id_and_game_id(params[:id], params[:game_id])
+
+    respond_to do |format|
+      if @user.drop_flag(flag)
+        format.html { redirect_to @user, notice: 'Dropped it!' }
+        format.json { head :no_content }
+      end
+    end
+  end
 end

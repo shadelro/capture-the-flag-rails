@@ -11,16 +11,31 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130128233341) do
+ActiveRecord::Schema.define(:version => 20130129224355) do
+
+  create_table "flags", :force => true do |t|
+    t.integer  "game_id"
+    t.integer  "user_id"
+    t.float    "latitude_default"
+    t.float    "longitude_default"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "flags", ["game_id"], :name => "index_flags_on_game_id", :unique => true
 
   create_table "games", :force => true do |t|
     t.string   "name"
-    t.float "latitude_goal"
-    t.float "longitude_goal"
-    t.boolean "is_active"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.float    "latitude_goal"
+    t.float    "longitude_goal"
+    t.boolean  "in_progress"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
+
+  add_index "games", ["name"], :name => "index_games_on_name", :unique => true
 
   create_table "registrations", :force => true do |t|
     t.integer  "game_id"
@@ -38,5 +53,7 @@ ActiveRecord::Schema.define(:version => 20130128233341) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "users", ["name"], :name => "index_users_on_name", :unique => true
 
 end

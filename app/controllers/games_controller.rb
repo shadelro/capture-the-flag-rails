@@ -18,7 +18,6 @@ class GamesController < ApplicationController
     @registrations = Hash[ @game.users.collect do |user|
       [user.id, Registration.find_by_game_id_and_user_id(@game.id, user.id)]
     end]
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @game }
@@ -34,22 +33,6 @@ class GamesController < ApplicationController
       format.html
       format.json { render json: @game }
     end
-  end
-
-  def add_user
-    @game = Game.find(params[:id])
-    @user = User.find_by_name(params[:user_name])
-    @game.add_user!(@user)
-
-    redirect_to @game
-  end
-
-  def remove_user
-    @game = Game.find(params[:id])
-    @user = User.find_by_name(params[:user_name])
-    @game.remove_user!(@user)
-
-    redirect_to @game
   end
 
   # GET /games/1/edit
@@ -98,6 +81,43 @@ class GamesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to games_url }
       format.json { head :no_content }
+    end
+  end
+
+
+  def add_user
+    @game = Game.find(params[:id])
+    @user = User.find_by_name(params[:user_name])
+    @game.add_user!(@user)
+
+    redirect_to @game
+  end
+
+  def remove_user
+    @game = Game.find(params[:id])
+    @user = User.find_by_name(params[:user_name])
+    @game.remove_user!(@user)
+
+    redirect_to @game
+  end
+
+  def start_game
+    @game = Game.find(params[:id])
+    respond_to do |format|
+      if @game.start_game
+        format.html { redirect_to @game, notice: 'Game was successfully started.' }
+        format.json { head :no_content }
+      end
+    end
+  end
+
+  def end_game
+    @game = Game.find(params[:id])
+    respond_to do |format|
+      if @game.end_game
+        format.html { redirect_to @game, notice: 'Game was successfully ended.' }
+        format.json { head :no_content }
+      end
     end
   end
 end

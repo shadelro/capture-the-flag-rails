@@ -10,7 +10,12 @@
   %b Games:
   %ul
     - @user.games.each do |game|
-      %li= link_to game.name, game_path
+      %li
+        = link_to game.name, game_path(game)
+        - if Flag.find_by_user_id_and_game_id(@user.id, game.id)
+          = link_to 'Drop Flag', drop_flag_user_path(game_id: game)
+        - else
+          = link_to 'Grab Flag', pick_up_flag_user_path(game_id: game)
 
 = link_to 'Edit', edit_user_path(@user)
 \|
