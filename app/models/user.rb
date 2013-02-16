@@ -1,3 +1,5 @@
+# coding: UTF-8
+
 class User < ActiveRecord::Base
   attr_accessible :name
   attr_accessible :latitude
@@ -15,8 +17,8 @@ class User < ActiveRecord::Base
   end
 
   def update_location(latitude, longitude)
-    self.latitude = latitude
-    self.longitude = longitude
+    self.latitude = latitude.to_f
+    self.longitude = longitude.to_f
     self.save
   end
 

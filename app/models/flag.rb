@@ -1,3 +1,5 @@
+# coding: UTF-8
+
 class Flag < ActiveRecord::Base
   attr_accessible :game_id
   attr_accessible :latitude_default, :longitude_default

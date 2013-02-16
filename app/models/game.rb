@@ -1,3 +1,5 @@
+# coding: UTF-8
+
 class Game < ActiveRecord::Base
   attr_accessible :name
   attr_accessible :latitude_goal

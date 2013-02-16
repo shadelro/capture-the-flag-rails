@@ -1,3 +1,5 @@
+# coding: UTF-8
+
 class UsersController < ApplicationController
   # GET /users
   # GET /users.json
@@ -14,11 +16,6 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @user }
-    end
   end
 
   # GET /users/new
@@ -83,14 +80,13 @@ class UsersController < ApplicationController
 
   def update_location
     @user = User.find(params[:id])
-    if @user.update_location(params[:latitude], params[:longitude])
-      format.json { head :no_content }
-    end
+    @user.update_location(params[:latitude], params[:longitude])
   end
 
   def pick_up_flag
     @user = User.find(params[:id])
-    flag = Flag.find_by_game_id(params[:game_id])
+    game = Game.find_by_name(params[:game_name])
+    flag = game.flag
 
     respond_to do |format|
       if @user.pick_up_flag(flag)

@@ -1,3 +1,5 @@
+# coding: UTF-8
+
 CaptureTheFlag::Application.routes.draw do
   root to: 'games#index'
 

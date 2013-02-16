@@ -1,7 +1,10 @@
+# coding: UTF-8
+
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.10'
 gem 'haml-rails', '~> 0.3.5'
+gem 'jbuilder', '1.0.2'
+gem 'rails', '3.2.10'
 
 group :development do
   gem 'better_errors', '~> 0.3.2'
@@ -14,7 +17,6 @@ end
 
 group :test do
   gem 'rspec-rails', '~> 2.12.2'
-  gem 'webmock', '~> 1.9.0'
 end
 
 # Gems used only for assets and not required
