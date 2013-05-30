@@ -12,6 +12,10 @@ class Game < ActiveRecord::Base
 
   before_create :default_values
 
+  scope :for_user, ->(user_id) {
+    joins(:registrations).where(registrations: {user_id: user_id})
+  }
+
   def default_values
     self.latitude_goal ||= 0
     self.longitude_goal ||= 0

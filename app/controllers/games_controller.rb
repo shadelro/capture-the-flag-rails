@@ -5,7 +5,12 @@ class GamesController < ApplicationController
   # GET /games
   # GET /games.json
   def index
-    @games = Game.all
+    user_id = params[:user_id]
+    if user_id
+      @games = Game.for_user(user_id)
+    else
+      @games = Game.all
+    end
   end
 
   # GET /games/1
